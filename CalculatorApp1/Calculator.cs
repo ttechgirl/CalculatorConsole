@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using CalculatorCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace CalculatorApp
 {
@@ -11,18 +12,32 @@ namespace CalculatorApp
 
         public static void RunCalculator()
         {
-            float num1 = 0;
+            float num1 = 0; //assigned zero to variable num1
             float num2 = 0;
 
 
-            string restartCheck;
+            string restartCheck; //declared the variable restartcheck
 
             Console.WriteLine("input your first number , and then press Enter");
-            num1 = (float)Convert.ToDouble(Console.ReadLine());
+            string numinput1 = Console.ReadLine();
+
+            var chechNum1 = float.TryParse(numinput1, out num1);
+
+            if (!chechNum1)
+            {
+                Console.WriteLine("Invalid input.Please enter an integer value: ");
+                numinput1 = Console.ReadLine();
+            }
 
             Console.WriteLine("input your second number , and then press Enter");
-            num2 = (float)Convert.ToDouble(Console.ReadLine());
+            string numinput2 = Console.ReadLine();
 
+            var chechNum2 = float.TryParse(numinput2, out num2);
+            if (!chechNum2)
+            {
+                Console.WriteLine("Invalid input.Please enter an integer value: ");
+                numinput1 = Console.ReadLine();
+            }
 
             Console.WriteLine("Choose an option from the following list:");
             Console.WriteLine("\ta - Add");
@@ -32,7 +47,7 @@ namespace CalculatorApp
             Console.WriteLine("Your option? ");
 
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine())  //using switch conditional statement 
             {
                 case "a":
                     Console.WriteLine($"Your answer is : {num1} + {num2} = " + (num1 + num2));
@@ -47,7 +62,7 @@ namespace CalculatorApp
                     break;
 
                 case "d":
-                    while (num2 == 0)
+                    while (num2 == 0) //iteration or the while loop
                     {
 
                         Console.WriteLine("Enter a non-zero denominator: ");
@@ -55,18 +70,19 @@ namespace CalculatorApp
                     }
                     Console.WriteLine($"Your answer is : {num1} / {num2} = " + (num1 / num2));
                     break;
-            }
+            } 
 
             Console.Write("Type 'yes' to restart the application  ");
-            restartCheck = Console.ReadLine();
-            if (restartCheck == "yes")
+            restartCheck = Console.ReadLine(); //user input
+            if (restartCheck == "yes") //if statement
             {
                 Console.WriteLine("--------------------------");
                 Console.WriteLine("Console Calculator in C#\r");
                 Console.WriteLine("------------------------\n");
 
 
-                CalculatorCore.Calculator1.Calc();
+                //Calculator1.Calc();
+                RunCalculator();
 
             }
             else

@@ -109,7 +109,7 @@ namespace CalculatorCore
 
                 try
                 {
-                    var calculator = new Calculator1();
+                    var calculator = new Calculator1(); //instantiation
                     result = calculator.DoOperation(numb1, numb2, type);
                     if (double.IsNaN(result)) //checking cases where a non integer is inputed
                     {
